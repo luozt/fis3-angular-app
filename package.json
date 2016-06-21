@@ -19,6 +19,10 @@
     "type": "git",
     "url": "git+https://github.com/luozt/fis3-ng2-app.git"
   },
+  "engines": {
+    "node": "4.x",
+    "npm": "2.x"
+  },
   "keywords": [
     "fis3",
     "ng2",
