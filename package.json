@@ -1,5 +1,5 @@
 {
-  "name": "fis3-ng2-app",
+  "name": "fis3-angular2-app",
   "version": "0.0.0",
   "description": "使用fis3构建工具来构建基于angular2的App",
   "main": "index.js",
@@ -12,6 +12,7 @@
     "server.clear": "fis3 server stop && fis3 server clean",
     "start": "npm run server.start && npm run release",
     "start.dev": "npm run server.start && npm run release.dev",
+    "postinstall": "npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
