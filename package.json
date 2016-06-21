@@ -1,0 +1,69 @@
+{
+  "name": "fis3-ng2-app",
+  "version": "0.0.0",
+  "description": "使用fis3构建工具来构建基于angular2的App",
+  "main": "index.js",
+  "scripts": {
+    "release": "fis3 release",
+    "release.dev": "fis3 release -w",
+    "server.start": "fis3 server start",
+    "server.stop": "fis3 server stop",
+    "server.clean": "fis3 server clean",
+    "server.clear": "fis3 server stop && fis3 server clean",
+    "start": "npm run server.start && npm run release",
+    "start.dev": "npm run server.start && npm run release.dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luozt/fis3-ng2-app.git"
+  },
+  "keywords": [
+    "fis3",
+    "ng2",
+    "angular2"
+  ],
+  "author": "LUOZHITAO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luozt/fis3-ng2-app/issues"
+  },
+  "homepage": "https://github.com/luozt/fis3-ng2-app#readme",
+  "devDependencies": {
+    "fis-mod": "^1.0.1",
+    "fis-optimizer-htmlmin": "^0.1.2",
+    "fis-optimizer-png-compressor": "^0.1.6",
+    "fis-parser-jade": "0.0.12",
+    "fis-parser-less": "^0.1.3",
+    "fis-parser-react": "^0.13.3",
+    "fis-postpackager-replace": "0.0.3",
+    "fis3": "^3.4.13",
+    "fis3-deploy-local-supply": "0.0.2",
+    "fis3-hook-commonjs": "^0.1.22",
+    "fis3-hook-node_modules": "^2.2.3",
+    "fis3-hook-relative": "^1.0.7",
+    "fis3-parser-typescript": "^0.2.5",
+    "fis3-postpackager-loader": "^1.5.2",
+    "fis3-preprocessor-js-require-css": "^0.1.0",
+    "fis3-preprocessor-js-require-file": "^0.1.0",
+    "is-buffer": "^1.1.3",
+    "liftoff": "^2.2.1",
+    "minimist": "^1.2.0",
+    "process": "^0.11.5"
+  },
+  "dependencies": {
+    "@angular/common": "^2.0.0-rc.2",
+    "@angular/compiler": "^2.0.0-rc.2",
+    "@angular/core": "^2.0.0-rc.2",
+    "@angular/forms": "^0.1.0",
+    "@angular/http": "^2.0.0-rc.2",
+    "@angular/platform-browser": "^2.0.0-rc.2",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.2",
+    "@angular/router": "^3.0.0-alpha.7",
+    "crypto": "0.0.3",
+    "jquery": "^3.0.0",
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "^0.6.12"
+  }
+}
