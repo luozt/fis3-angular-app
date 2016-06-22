@@ -221,6 +221,13 @@ fis.match("::package", {
 
 */
 
+/**
+ * 开发Angular2应用，使src/client下的文件直接发布到根目录下
+ */
+fis.match('src/client/(**)',{
+  release:"$1"
+});
+
 
 /*本地打包（相对路径）
   测试环境打包（绝对路径）
