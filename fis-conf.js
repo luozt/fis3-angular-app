@@ -171,7 +171,7 @@ fis
     postpackager: [
       fis.plugin("loader"),
       fis.plugin('replace', {
-        '/src/client/index.html': {
+        '/src/index.html': {
           '__NODE_ENV': "\"dev\""
         }
       })
@@ -224,7 +224,7 @@ fis.match("::package", {
 /**
  * 开发Angular2应用，使src/client下的文件直接发布到根目录下
  */
-fis.match('src/client/(**)',{
+fis.match('src/(**)',{
   release:"$1"
 });
 
@@ -243,7 +243,7 @@ fis.media('lc')
         allInOne: true
       }),
       fis.plugin("replace", {
-        "/src/client/index.html": {
+        "/src/index.html": {
           "__NODE_ENV": "\"lc\""
         }
       })
@@ -284,7 +284,7 @@ fis.media("qa")
         allInOne: true
       }),
       fis.plugin("replace", {
-        "/src/client/index.html": {
+        "/src/index.html": {
           "__NODE_ENV": "\"qa\""
         }
       })
@@ -325,7 +325,7 @@ fis.media("pr")
         allInOne: true
       }),
       fis.plugin("replace", {
-        "/src/client/index.html": {
+        "/src/index.html": {
           "__NODE_ENV": "\"pr\""
         }
       })
