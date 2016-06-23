@@ -2,7 +2,8 @@ import { AboutComponent } from './about.component';
 
 export const AboutRoutes = [
   {
-    path: 'about',
+    path: '/about',
+    name: 'About',
     component: AboutComponent
   }
 ];

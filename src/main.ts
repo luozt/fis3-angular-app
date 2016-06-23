@@ -1,9 +1,8 @@
-import { APP_BASE_HREF } from '@angular/common';
-import { disableDeprecatedForms, provideForms } from '@angular/forms/index';
 import { enableProdMode } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
 
-import { APP_ROUTER_PROVIDERS } from './app/app.routes';
+import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
+
 import { AppComponent } from './app/app.component';
 
 if('pr' === window.NODE_ENV){
@@ -11,11 +10,5 @@ if('pr' === window.NODE_ENV){
 }
 
 bootstrap(AppComponent, [
-  disableDeprecatedForms(),
-  provideForms(),
-  APP_ROUTER_PROVIDERS,
-  {
-    provide: APP_BASE_HREF,
-    useValue: '/'
-  }
+  ROUTER_PROVIDERS
 ]);
