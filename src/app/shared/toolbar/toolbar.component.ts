@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'sd-toolbar',
-  templateUrl: __uri('toolbar.component.html'),
-  styleUrls: [__uri('toolbar.component.css')]
+  templateUrl: './toolbar.component.html',
+  styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent {}

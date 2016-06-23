@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms/index';
+import { NgForm } from "@angular/common";
+
 import { NameListService } from '../shared/index';
 
 @Component({
   moduleId: module.id,
   selector: 'sd-home',
-  templateUrl: __uri('home.component.html'),
-  styleUrls: [__uri('home.component.css')],
-  directives: [REACTIVE_FORM_DIRECTIVES]
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
   newName: string;

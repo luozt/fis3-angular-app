@@ -2,11 +2,8 @@ import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES, RouteConfig } from '@angular/router-deprecated';
 import { HTTP_PROVIDERS } from '@angular/http';
 
-// import { AboutRoutes } from './+about/index';
-// import { HomeRoutes } from './+home/index';
-
-import { HomeComponent } from './+home/index';
-import { AboutComponent } from './+about/index';
+import { AboutRoutes } from './+about/index';
+import { HomeRoutes } from './+home/index';
 
 import { NameListService, NavbarComponent, ToolbarComponent } from './shared/index';
 
@@ -19,20 +16,11 @@ import { NameListService, NavbarComponent, ToolbarComponent } from './shared/ind
   moduleId: module.id,
   selector: 'sd-app',
   viewProviders: [NameListService, HTTP_PROVIDERS],
-  templateUrl: __uri('app.component.html'),
+  templateUrl: './app.component.html',
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
 })
 @RouteConfig([
-  {
-    path: '/',
-    name: 'Home',
-    component: HomeComponent,
-    useAsDefault: true
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: AboutComponent
-  }
+  ...HomeRoutes,
+  ...AboutRoutes
 ])
 export class AppComponent {}

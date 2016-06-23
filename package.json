@@ -24,8 +24,8 @@
     "url": "git+https://github.com/luozt/fis3-ng2-app.git"
   },
   "engines": {
-    "node": "4.x",
-    "npm": "2.x"
+    "node": "6.x",
+    "npm": "3.x"
   },
   "keywords": [
     "fis3",
@@ -55,6 +55,7 @@
     "fis3-postpackager-loader": "^1.5.2",
     "fis3-preprocessor-js-require-css": "^0.1.0",
     "fis3-preprocessor-js-require-file": "^0.1.0",
+    "fis3-preprocessor-ng2-inline": "0.0.1",
     "is-buffer": "^1.1.3",
     "liftoff": "^2.2.1",
     "minimist": "^1.2.0",

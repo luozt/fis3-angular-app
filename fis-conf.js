@@ -41,15 +41,6 @@ fis.hook("commonjs", {
   baseUrl: "./src",
   extList: ['.js', '.jsx', '.es', '.ts', '.tsx']
 });
-// our module loader 
-fis.match('/node_modules/fis-mod/mod.js', {
-  wrap: false
-});
-// !!REQUIRED
-fis.match('/{node_modules, src}/**.js', {
-  isMod: true,
-  useSameNameRequire: true
-});
 
 // DO NOT DO THIS! DO NOT EVER EXPLICITLY MENTION /node_modules
 //fis.match('/node_modules/(**).js', {
@@ -62,6 +53,17 @@ fis.hook('node_modules', {
   // ,
   // ignoreDevDependencies: true
 });
+
+// our module loader 
+fis.match('/node_modules/fis-mod/mod.js', {
+  wrap: false
+});
+// !!REQUIRED
+fis.match('/{node_modules, src}/**.js', {
+  isMod: true,
+  useSameNameRequire: true
+});
+
 
 fis.match('src/(**).{js,es6,jsx,ts,tsx}', {
   isMod: true,
@@ -85,7 +87,7 @@ const es6Parser = function (content, file, options) {
   return result.code;
 };
 
-fis.match('**.{es6,jsx}', {
+fis.match('src/**.{es6,jsx}', {
   parser: es6Parser,
   rExt: '.js'
 });
@@ -127,6 +129,7 @@ fis.match("src/**.jsx", {
 fis.set('project.fileType.text', 'ts,tsx');
 fis.match("src/**.ts", {
   parser: fis.plugin("typescript"),
+  preprocessor: fis.plugin('ng2-inline'),
   rExt: ".js"
 })
 
@@ -143,7 +146,7 @@ fis.match("src/**.jade", {
   isHtmlLike: true
 });
 
-fis.match("src/css/**.less", {
+fis.match("src/**.less", {
   parser: fis.plugin("less"),
   rExt: ".css"
 });

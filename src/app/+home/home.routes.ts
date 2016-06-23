@@ -1,9 +1,10 @@
-import { HomeComponet } from './home.component';
+import { HomeComponent } from './home.component';
 
 export const HomeRoutes = [
   {
-    path: '',
-    component: HomeComponet,
-    index: true
+    path: '/',
+    name: 'Home',
+    component: HomeComponent,
+    useAsDefault: true
   }
 ];
