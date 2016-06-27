@@ -28,9 +28,10 @@ fis.set('css-scale',1);
 
 fis.set("project.files", ["src/**"]);
 
-fis.set("project.ignore", [".git/**"]);
+fis.set("project.ignore", [".git/**", "dist/**"]);
 
-fis.set("project.charset", "utf8");
+fis.set('charset', 'utf-8');
+fis.set('project.charset', 'utf-8');
 
 
 /**
@@ -151,11 +152,6 @@ fis.match("src/**.less", {
   rExt: ".css"
 });
 
-// fis.match("_**", {
-//   release: false
-// });
-
-
 fis
   .match('**.{js,jsx,es,ts,tsx,coffee,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
     useHash: false
@@ -227,8 +223,8 @@ fis.match("::package", {
 /**
  * 开发Angular2应用，使src/client下的文件直接发布到根目录下
  */
-fis.match('src/(**)',{
-  release:"$1"
+fis.match('src/index.{html,jade}',{
+  release:"index.html"
 });
 
 
@@ -267,16 +263,13 @@ fis.media('lc')
   .match('**', {
     relative: true,
     deploy: [fis.plugin('encoding'),fis.plugin('local-supply', {
-      to: './lc'
+      to: './dist/lc'
     })]
   })
   // HTML模板配置
   // 模板发布到服务器后以相对服务器的路径进行配置
   .match("src/**/*.{jade,html}", {
     relative: "/src"
-  })
-  .match('src/(**)',{
-    release:"$1"
   });
 
 // 测试环境
@@ -313,11 +306,8 @@ fis.media("qa")
   })
   .match("**", {
     deploy: fis.plugin('local-supply', {
-      to: './qa'
+      to: './dist/qa'
     })
-  })
-  .match('src/(**)',{
-    release:"$1"
   });
 
 // 正式环境
@@ -365,11 +355,8 @@ fis.media("pr")
   })
   .match("**", {
     deploy: fis.plugin('local-supply', {
-      to: './pr'
+      to: './dist/pr'
     })
-  })
-  .match('src/(**)',{
-    release:"$1"
   });
 
 // 直接发布文件到远端
