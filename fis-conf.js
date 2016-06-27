@@ -1,6 +1,6 @@
-
-/*配置选项
--------------------------*/
+/**
+ * 配置选项
+ */
 // 测试域名
 fis.set("cdn-path", "http://10.0.0.26:8087/example-managementsite");
 
@@ -12,27 +12,17 @@ fis.set("cdn-path-push", "http://10.0.0.26/res");
 fis.set("http-push-receiver", "http://10.0.0.26/receiver.php");
 fis.set("http-push-to", "/usr/share/nginx/html/res");
 
-/*用户自定义配置
--------------------------*/
-// 示例：打包go前缀开头文件的为一个文件
-/*fis.match("src/js/go.**.{coffee,js}", {
-  packTo: "src/pkg/go.js"
-});*/
+// 修改雪碧图放大缩小倍数，默认是1，iphone是0.5
+fis.set('css-scale', 1);
 
-/*统一配置
-(开发者无需修改，特殊情况除外)
--------------------------*/
-
-//修改雪碧图放大缩小倍数，默认是1，iphone是0.5
-fis.set('css-scale',1);
-
+/**
+ * 统一配置
+ * (开发者无需修改，特殊情况除外)
+ */
 fis.set("project.files", ["src/**"]);
-
-fis.set("project.ignore", [".git/**", "dist/**"]);
-
+fis.set("project.ignore", [".git/**", "dist/**", "node_modules/**", "README.md"]);
 fis.set('charset', 'utf-8');
 fis.set('project.charset', 'utf-8');
-
 
 /**
  * npm module require setup
@@ -44,15 +34,14 @@ fis.hook("commonjs", {
 });
 
 // DO NOT DO THIS! DO NOT EVER EXPLICITLY MENTION /node_modules
-//fis.match('/node_modules/(**).js', {
-//  id: '$1'
-//});
-//禁用fis3默认的fis-hook-components
+// fis.match('/node_modules/(**).js', {
+//   id: '$1'
+// });
+// 禁用fis3默认的fis-hook-components
 fis.unhook('components');
 fis.hook('node_modules', {
   useDev: true
-  // ,
-  // ignoreDevDependencies: true
+  // , ignoreDevDependencies: true
 });
 
 // our module loader 
@@ -64,7 +53,6 @@ fis.match('/{node_modules, src}/**.js', {
   isMod: true,
   useSameNameRequire: true
 });
-
 
 fis.match('src/(**).{js,es6,jsx,ts,tsx}', {
   isMod: true,
@@ -101,7 +89,6 @@ fis.match('map.json', {
   release: '$&'
 });
 
-
 // 添加css和image加载支持
 fis.match('*.{js,jsx,ts,tsx,es}', {
   preprocessor: [
@@ -112,31 +99,17 @@ fis.match('*.{js,jsx,ts,tsx,es}', {
   ]
 });
 
-
-/*
-
-fis.config.set('project.fileType.text', 'jsx'); //*.jsx files are text file.
-fis.config.set('modules.parser.jsx', 'react');  //compile *.jsx with fis-parser-react plugin
-fis.config.set('roadmap.ext.jsx', 'js');        //*.jsx are exactly treat as *.js
-
-fis.match("src/**.jsx", {
-  parser: fis.plugin("react"),
-  rExt: ".js"
-});
-
-*/
-
-/*typescript*/
+// typescript support
 fis.set('project.fileType.text', 'ts,tsx');
 fis.match("src/**.ts", {
   parser: fis.plugin("typescript"),
-  preprocessor: fis.plugin('ng2-inline'),
+  preprocessor: fis.plugin('ng2-inline'), // ts里以相对路径引入模块
   rExt: ".js"
 })
 
-
-/********************************/
-/**其他预编译处理*/
+/**
+ * Jade/less support
+ */
 fis.config.set('settings.parser.jade', {
   pretty: true
 });
@@ -152,8 +125,11 @@ fis.match("src/**.less", {
   rExt: ".css"
 });
 
+/**
+ * 开发通用设置
+ */
 fis
-  .match('**.{js,jsx,es,ts,tsx,coffee,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
+  .match('**.{js,jsx,es,ts,tsx,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
     useHash: false
   })
   .match('**.{css,less}', {
@@ -177,18 +153,7 @@ fis
     ]
   });
 
-// 打包共用的js
-// fis.match("src/**/pkg.**.{coffee,js}", {
-//   packTo: "src/pkg/autocombined.js"
-// });
-
-// // 打包共用的css
-// fis.match("src/**/pkg.**.{less,css}", {
-//   packTo: "src/pkg/autocombined.css"
-// });
-
-/*编译a标签href指向资源路径
--------------------------*/
+// 编译a标签href指向资源路径
 fis.match('src/**.{jade,html}', {
   preprocessor: fis.plugin(function(content, file) {
     var uri = fis.compile.lang.uri;
@@ -199,41 +164,23 @@ fis.match('src/**.{jade,html}', {
   })
 });
 
-/*把每个页面引入的JS/CSS都打包成一个文件
-* 但由于lib文件是不改的，业务js则经常改
-* 所以不建议这么做
-
-fis.match("::package", {
-  postpackager: fis.plugin("loader", {
-    allInOne: true
-  })
-});
-
-// 这是指定打包js的路径
-fis.match("::package", {
-  postpackager: fis.plugin("loader", {
-    allInOne: {
-      js: "src/pkg/${filepath}_aio.js"
-    }
-  })
-});
-
-*/
-
-/**
- * 开发Angular2应用，使src/client下的文件直接发布到根目录下
- */
+// 开发Angular2应用，使src/client下的文件直接发布到根目录下
 fis.match('src/index.{html,jade}',{
   release:"index.html"
 });
 
+// 带_开头的文件不发布
+fis.match("_**", {
+  release: false
+});
 
-/*本地打包（相对路径）
-  测试环境打包（绝对路径）
-  正式环境打包（绝对路径）
--------------------------*/
-
-//本地打包，相对路径
+/**
+ * 本地打包（相对路径）lc
+ * 测试环境打包（绝对路径）qa
+ * 正式环境打包（绝对路径）pr
+ * 远程发布环境（绝对路径）pu
+ */
+// 本地打包，相对路径
 fis.media('lc')
   .hook("relative")
   .match("::package", {
@@ -252,7 +199,7 @@ fis.media('lc')
     useSprite: true,
     optimizer: fis.plugin('clean-css')
   })
-  .match('**.{js,coffee}',{
+  .match('**.js',{
     optimizer: fis.plugin('uglify-js')
   })
   .match("**.png", {
@@ -286,7 +233,7 @@ fis.media("qa")
       })
     ]
   })
-  .match('**.{js,jsx,es,ts,tsx,coffee,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
+  .match('**.{js,jsx,es,ts,tsx,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
     domain: fis.get("cdn-path"),
     useHash: true
   })
@@ -324,7 +271,7 @@ fis.media("pr")
       })
     ]
   })
-  .match('**.{js,jsx,es,ts,tsx,coffee,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
+  .match('**.{js,jsx,es,ts,tsx,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
     domain: fis.get("cdn-path-release"),
     useHash: true
   })
@@ -332,7 +279,7 @@ fis.media("pr")
     useSprite: true,
     optimizer: fis.plugin('clean-css')
   })
-  .match('**.{js,coffee}',{
+  .match('**.js',{
     optimizer: fis.plugin('uglify-js')
   })
   .match("**.{jade,html}", {
@@ -361,7 +308,7 @@ fis.media("pr")
 
 // 直接发布文件到远端
 fis.media("pu")
-  .match('**.{js,jsx,es,ts,tsx,coffee,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
+  .match('**.{js,jsx,es,ts,tsx,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
     domain: fis.get("cdn-path-push"),
     useHash: true
   })
@@ -377,7 +324,3 @@ fis.media("pu")
       to: fis.get("http-push-to")
     })
   });
-
-
-
-
