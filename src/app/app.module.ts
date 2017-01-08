@@ -4,10 +4,12 @@ import { HttpModule } from '@angular/http';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { RouterModule, PreloadAllModules } from '@angular/router';
-// import { ROUTES } from './app.routes';
+import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
+import { ContentsModule } from './contents';
+import { PagesModule } from './pages';
 
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -23,7 +25,9 @@ const APP_PROVIDERS = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    // RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    ContentsModule,
+    PagesModule,
   ],
   providers: [
     APP_PROVIDERS

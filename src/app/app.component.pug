@@ -1,12 +1,6 @@
-//- nav
-//-   a([routerlink]=" ['./'] ", routerlinkactive='active') Index
-//-   a([routerlink]=" ['./home'] ", routerlinkactive='active') Home
-//-   a([routerlink]=" ['./about'] ", routerlinkactive='active') About
+navigation([data]="controlData.navigation")
+
 main
-  //- router-outlet
-  p main content
-pre.app-state.
-  this.appState.state = {{ appState.state | json }}
-footer
-  span WebPack Angular 2 Starter by
-    a([href]='url') @AngularClass
+  router-outlet
+
+footer-bar

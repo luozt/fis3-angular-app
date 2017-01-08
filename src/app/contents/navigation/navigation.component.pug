@@ -1,0 +1,8 @@
+nav([ngSwitch]="data.type")
+  ul(*ngSwitchCase="'router'")
+    li(*ngFor="let item of data.items")
+      a([routerLink]="item.routerLink", [routerLinkActive]="item.routerLinkActive") {{item.text}}
+  ul(*ngSwitchDefault="")
+    li(*ngFor="let item of data.items")
+      a([href]="item.href") {{item.text}}
+
