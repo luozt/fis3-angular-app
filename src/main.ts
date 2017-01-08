@@ -1,14 +1,14 @@
-import { enableProdMode } from '@angular/core';
-import { bootstrap } from '@angular/platform-browser-dynamic';
 
-import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootloader } from '@angularclass/hmr';
+import { AppModule } from './app';
 
-import { AppComponent } from './app/app.component';
-
-if('pr' === window.NODE_ENV){
-  enableProdMode();
+/** 启动APP */
+export function main(): Promise<any> {
+  return platformBrowserDynamic()
+    .bootstrapModule(AppModule)
+    .catch((err) => console.error(err));
 }
 
-bootstrap(AppComponent, [
-  ROUTER_PROVIDERS
-]);
+bootloader(main);
+

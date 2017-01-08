@@ -1,24 +1,25 @@
+
 /**
- * 配置选项
+ * 开发者配置系列
  */
-// 测试域名
-fis.set("cdn-path", "http://10.0.0.26:8087/example-managementsite");
 
-// 正式环境域名
-fis.set("cdn-path-release", "http://www.example.com");
+// 配置路径
+const CDN_PATH = {
+  qa: 'http://www.example.com/qa',
+  pr: 'http://www.example.com/pr'
+};
 
-// 推送到远端的域名
-fis.set("cdn-path-push", "http://10.0.0.26/res");
-fis.set("http-push-receiver", "http://10.0.0.26/receiver.php");
-fis.set("http-push-to", "/usr/share/nginx/html/res");
+// 配置通用资源文件
+const REG_ALL_RESOURCES = '**.{js,jsx,es,ts,tsx,html,pug,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2,ico}';
 
 // 修改雪碧图放大缩小倍数，默认是1，iphone是0.5
 fis.set('css-scale', 1);
 
 /**
- * 统一配置
- * (开发者无需修改，特殊情况除外)
+ * 通用配置系列
+ * 开发者无需修改，特殊情况除外
  */
+
 fis.set("project.files", ["src/**"]);
 fis.set("project.ignore", [".git/**", "dist/**", "node_modules/**", "README.md"]);
 fis.set('charset', 'utf-8');
@@ -27,6 +28,7 @@ fis.set('project.charset', 'utf-8');
 /**
  * npm module require setup
  */
+
 // used to resolve dependencies and wrap your code with `define`. 
 fis.hook("commonjs", {
   baseUrl: "./src",
@@ -37,17 +39,18 @@ fis.hook("commonjs", {
 // fis.match('/node_modules/(**).js', {
 //   id: '$1'
 // });
+
 // 禁用fis3默认的fis-hook-components
 fis.unhook('components');
 fis.hook('node_modules', {
   useDev: true
-  // , ignoreDevDependencies: true
 });
 
 // our module loader 
 fis.match('/node_modules/fis-mod/mod.js', {
   wrap: false
 });
+
 // !!REQUIRED
 fis.match('/{node_modules, src}/**.js', {
   isMod: true,
@@ -105,31 +108,26 @@ fis.match("src/**.ts", {
   parser: fis.plugin("typescript"),
   preprocessor: fis.plugin('ng2-inline'), // ts里以相对路径引入模块
   rExt: ".js"
-})
+});
 
-/**
- * Jade/less support
- */
-fis.config.set('settings.parser.jade', {
+fis.config.set('settings.parser.{jade, pug}', {
   pretty: true
 });
 
-fis.match("src/**.jade", {
-  parser: fis.plugin("jade"),
+fis.match("src/**.{jade, pug}", {
+  parser: fis.plugin("pug"),
   rExt: ".html",
   isHtmlLike: true
 });
 
 fis.match("src/**.less", {
   parser: fis.plugin("less"),
+  preprocessor: fis.plugin('cssprefixer'),
   rExt: ".css"
 });
 
-/**
- * 开发通用设置
- */
 fis
-  .match('**.{js,jsx,es,ts,tsx,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
+  .match(REG_ALL_RESOURCES, {
     useHash: false
   })
   .match('**.{css,less}', {
@@ -144,17 +142,12 @@ fis
       margin: 1
     }),
     postpackager: [
-      fis.plugin("loader"),
-      fis.plugin('replace', {
-        '/src/index.html': {
-          '__NODE_ENV': "\"dev\""
-        }
-      })
+      fis.plugin("loader")
     ]
   });
 
 // 编译a标签href指向资源路径
-fis.match('src/**.{jade,html}', {
+fis.match('src/**.{pug,jade,html}', {
   preprocessor: fis.plugin(function(content, file) {
     var uri = fis.compile.lang.uri;
 
@@ -165,162 +158,140 @@ fis.match('src/**.{jade,html}', {
 });
 
 // 开发Angular2应用，使src/client下的文件直接发布到根目录下
-fis.match('src/index.{html,jade}',{
+fis.match('src/index.{html,jade,pug}', {
   release:"index.html"
 });
 
-// 带_开头的文件不发布
-fis.match("_**", {
-  release: false
-});
 
 /**
- * 本地打包（相对路径）lc
- * 测试环境打包（绝对路径）qa
- * 正式环境打包（绝对路径）pr
- * 远程发布环境（绝对路径）pu
+ * 打包系列配置
+ * lc: 本地打包，相对路径
+ * qa: 测试环境打包，绝对路径
+ * pr: 正式环境打包，绝对路径
  */
+
+// // 带_开头的文件不发布
+// ['qa', 'pr'].forEach(function(media){
+//   fis.media(media)
+//     .match('_**', {release: false});
+// });
+
 // 本地打包，相对路径
-fis.media('lc')
-  .hook("relative")
-  .match("::package", {
-    postpackager: [
-      fis.plugin('loader', {
-        allInOne: true
-      }),
-      fis.plugin("replace", {
-        "/src/index.html": {
-          "__NODE_ENV": "\"lc\""
-        }
-      })
-    ]
-  })
-  .match('**.{css,less}', {
-    useSprite: true,
-    optimizer: fis.plugin('clean-css')
-  })
-  .match('**.js',{
-    optimizer: fis.plugin('uglify-js')
-  })
-  .match("**.png", {
-    optimizer: fis.plugin("png-compressor", {
-      type: "pngquant"
+['lc'].forEach(function(media){
+  fis.media(media)
+    .hook("relative")
+    .match("::package", {
+      postpackager: [
+        fis.plugin('loader', {
+          allInOne: true
+        })
+      ]
     })
-  })
-  .match('**', {
-    relative: true,
-    deploy: [fis.plugin('encoding'),fis.plugin('local-supply', {
-      to: './dist/lc'
-    })]
-  })
-  // HTML模板配置
-  // 模板发布到服务器后以相对服务器的路径进行配置
-  .match("src/**/*.{jade,html}", {
-    relative: "/src"
-  });
+    .match('src/(**)', {
+      release: '$1'
+    })
+    .match("**.png", {
+      optimizer: fis.plugin("png-compressor", {
+        type: "pngquant"
+      })
+    })
+    .match('**.{css,less}', {
+      useSprite: true,
+      optimizer: fis.plugin('clean-css')
+    })
+    .match('**.js',{
+      optimizer: fis.plugin('uglify-js')
+    })
+    .match('**', {
+      relative: true,
+      // deploy: [fis.plugin('encoding'),fis.plugin('local-supply', {
+      //   to: './dist/'+media
+      // })]
+    })
+    // HTML模板配置
+    // 模板发布到服务器后以相对服务器的路径进行配置
+    .match("src/**/*.{pug, jade,html}", {
+      relative: "/src"
+    });
+});
 
 // 测试环境
-fis.media("qa")
-  .match("::package", {
-    postpackager: [
-      fis.plugin('loader', {
-        allInOne: true
-      }),
-      fis.plugin("replace", {
-        "/src/index.html": {
-          "__NODE_ENV": "\"qa\""
-        }
+['qa'].forEach(function(media){
+  fis.media(media)
+    .match("::package", {
+      postpackager: [
+        fis.plugin('loader', {
+          allInOne: true
+        })
+      ]
+    })
+    .match(REG_ALL_RESOURCES, {
+      domain: CDN_PATH[media],
+      useHash: true
+    })
+    .match('**.{css,less}', {
+      useSprite: true,
+      optimizer: fis.plugin('clean-css')
+    })
+    .match('**.js',{
+      optimizer: fis.plugin('uglify-js')
+    })
+    .match("**.png", {
+      optimizer: fis.plugin("png-compressor", {
+        type: "pngquant"
       })
-    ]
-  })
-  .match('**.{js,jsx,es,ts,tsx,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
-    domain: fis.get("cdn-path"),
-    useHash: true
-  })
-  .match('**.{css,less}', {
-    useSprite: true
-  })
-  .match("**.png", {
-    optimizer: fis.plugin("png-compressor", {
-      type: "pngquant"
     })
-  })
-  .match("index*.{jade,html}", {
-    useHash: false
-  })
-  .match("tpls/**.{jade,html}", {
-    useHash: true
-  })
-  .match("**", {
-    deploy: fis.plugin('local-supply', {
-      to: './dist/qa'
+    .match("index*.{pug,jade,html}", {
+      useHash: false
     })
-  });
+    // .match("**", {
+    //   deploy: fis.plugin('local-supply', {
+    //     to: './dist/'+media
+    //   })
+    // });
+});
 
 // 正式环境
-fis.media("pr")
-  .match("::package", {
-    postpackager: [
-      fis.plugin('loader', {
-        allInOne: true
-      }),
-      fis.plugin("replace", {
-        "/src/index.html": {
-          "__NODE_ENV": "\"pr\""
-        }
+['pr'].forEach(function(media){
+  fis.media(media)
+    .match("::package", {
+      postpackager: [
+        fis.plugin('loader', {
+          allInOne: true
+        })
+      ]
+    })
+    .match(REG_ALL_RESOURCES, {
+      domain: CDN_PATH[media],
+      useHash: true
+    })
+    .match('**.{css,less}', {
+      useSprite: true,
+      optimizer: fis.plugin('clean-css')
+    })
+    .match('**.js',{
+      optimizer: fis.plugin('uglify-js')
+    })
+    // .match("**.{pug, jade,html}", {
+    //   optimizer: fis.plugin("htmlmin", {
+    //     removeComments: true,
+    //     collapseWhitespace: true,
+    //     minifyJS: true
+    //   })
+    // })
+    .match("**.png", {
+      optimizer: fis.plugin("png-compressor", {
+        type: "pngquant"
       })
-    ]
-  })
-  .match('**.{js,jsx,es,ts,tsx,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
-    domain: fis.get("cdn-path-release"),
-    useHash: true
-  })
-  .match('**.{css,less}', {
-    useSprite: true,
-    optimizer: fis.plugin('clean-css')
-  })
-  .match('**.js',{
-    optimizer: fis.plugin('uglify-js')
-  })
-  .match("**.{jade,html}", {
-    optimizer: fis.plugin("htmlmin", {
-      removeComments: true,
-      collapseWhitespace: true,
-      minifyJS: true
     })
-  })
-  .match("**.png", {
-    optimizer: fis.plugin("png-compressor", {
-      type: "pngquant"
+    .match("index*.{pug,jade,html}", {
+      useHash: false
     })
-  })
-  .match("index*.{jade,html}", {
-    useHash: false
-  })
-  .match("tpls/**.{jade,html}", {
-    useHash: true
-  })
-  .match("**", {
-    deploy: fis.plugin('local-supply', {
-      to: './dist/pr'
-    })
-  });
+    // .match("**", {
+    //   deploy: fis.plugin('local-supply', {
+    //     to: './dist/'+media
+    //   })
+    // });
+});
 
-// 直接发布文件到远端
-fis.media("pu")
-  .match('**.{js,jsx,es,ts,tsx,html,jade,css,less,png,jpg,jpeg,gif,mp3,mp4,flv,swf,svg,eot,ttf,woff,woff2}', {
-    domain: fis.get("cdn-path-push"),
-    useHash: true
-  })
-  .match("index*.{jade,html}", {
-    useHash: false
-  })
-  .match("tpls/**.{jade,html}", {
-    useHash: true
-  })
-  .match("**", {
-    deploy: fis.plugin("http-push", {
-      receiver: fis.get("http-push-receiver"),
-      to: fis.get("http-push-to")
-    })
-  });
+
