@@ -25,9 +25,11 @@ const componentsList = [
 @NgModule({
   imports: [CommonModule, RouterModule, FormsModule],
   declarations: [
-  ].concat(componentsList),
+    ...componentsList
+  ],
   exports: [
-  ].concat(componentsList)
+    ...componentsList
+  ]
 })
 export class ContentsModule {
 }

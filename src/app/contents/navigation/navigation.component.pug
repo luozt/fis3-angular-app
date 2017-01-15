@@ -1,8 +1,8 @@
-nav([ngSwitch]="data.type")
-  ul(*ngSwitchCase="'router'")
+nav.navbar.navbar-inverse([ngSwitch]="data.type")
+  ul.nav.navbar-nav(*ngSwitchCase="'router'")
     li(*ngFor="let item of data.items")
       a([routerLink]="item.routerLink", [routerLinkActive]="item.routerLinkActive") {{item.text}}
-  ul(*ngSwitchDefault="")
+  ul.nav.navbar-nav(*ngSwitchDefault="")
     li(*ngFor="let item of data.items")
       a([href]="item.href") {{item.text}}
 

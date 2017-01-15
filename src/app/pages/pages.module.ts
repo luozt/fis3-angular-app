@@ -3,21 +3,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ContentsModule } from '../contents';
-import { HomeComponent } from './home';
+import { PgHomeComponent } from './pg-home';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 const componentsList = [
-  HomeComponent,
+  PgHomeComponent,
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule, FormsModule, ContentsModule],
   declarations: [
-  ].concat(componentsList),
+     ...componentsList
+  ],
   exports: [
-  ].concat(componentsList),
+     ...componentsList
+  ],
 })
 export class PagesModule {
 }

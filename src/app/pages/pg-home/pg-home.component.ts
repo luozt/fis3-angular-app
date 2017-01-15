@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.component.pug',
-  styleUrls: ['./home.component.less']
+  selector: 'pg-home',
+  templateUrl: './pg-home.component.pug',
+  styleUrls: ['./pg-home.component.less']
 })
-export class HomeComponent {
+export class PgHomeComponent {
   controlData = {
     welcome: null,
     hoOperate: null,
