@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import { WidgetsModule } from '../widgets';
 import { AuthComponent } from './auth';
 import { FooterBarComponent } from './footer-bar';
 import { HoOperateComponent } from './ho-operate';
@@ -23,7 +23,7 @@ const componentsList = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, WidgetsModule],
   declarations: [
     ...componentsList
   ],

@@ -126,6 +126,15 @@ fis.match("src/**.less", {
   rExt: ".css"
 });
 
+/**
+ * systemjs编译
+ * 另一个模块引入工具，不编译其模块引入语句
+ * 使得不会解析字符串里的__filename和__dirname
+ */
+fis.match("systemjs/**.{ts,js}", {
+  skipBrowserify: true
+});
+
 fis
   .match(REG_ALL_RESOURCES, {
     useHash: false

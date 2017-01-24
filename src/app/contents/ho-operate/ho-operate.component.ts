@@ -14,4 +14,20 @@ export class HoOperateComponent {
     btnText: '登录',
     onClickBtn: ()=>{}
   };
+
+  controlData = {
+    btnStart: null
+  };
+
+  ngOnInit(){
+    this.initControls();
+  }
+
+  initControls(){
+    this.controlData.btnStart = {
+      type: 'primary',
+      text: '去登录',
+      onClick: this.data.onClickBtn
+    };
+  }
 }

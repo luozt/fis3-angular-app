@@ -21,4 +21,28 @@ export class AuthComponent {
     // 提供的回调
     onSubmit: ()=>{}
   };
+
+  controlData = {
+    appBtn: null
+  };
+
+  ngOnInit(){
+    this.initControls();
+  }
+
+  initControls(){
+    this.controlData.appBtn = {
+      type: 'primary',
+      text: this.data.submitText,
+      onClick: this.data.onSubmit
+    };
+  }
+
+  submit(event){
+    event.preventDefault();
+    if(this.data.onSubmit){
+      this.data.onSubmit();
+    }
+    return false;
+  }
 }

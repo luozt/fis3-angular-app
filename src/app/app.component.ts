@@ -24,14 +24,22 @@ export class AppComponent implements OnInit {
 
   initControls(){
     this.controlData.navigation = {
-      // type: 'router', // unset | router
-      items: [{
-        href: '#',
-        text: '首页'
-      },{
-        href: '#1',
-        text: '测试页'
-      },]
+      type: 'router', // unset | router
+      items: [
+        {
+          routerLink: ['./home'],
+          routerLinkActive: 'active',
+          text: '首页'
+        }, {
+          routerLink: ['./login'],
+          routerLinkActive: 'active',
+          text: '登录'
+        }, {
+          routerLink: ['./detail'],
+          routerLinkActive: 'active',
+          text: '详情页'
+        }
+      ]
     };
   }
 

@@ -1,9 +1,11 @@
-form((submit)="data.onSubmit()")
-  div
-    label {{data.username.label}}
-    input(type="text", [ngModel]="data.username.value", [placeholder]="data.username.placeholder")
-  div
-    label {{data.password.label}}
-    input(type="password", [ngModel]="data.password.value", [placeholder]="data.password.placeholder")
-  div
-    button {{data.submitText}}
+.i-container
+  form.form((submit)="submit($event)")
+    .form-group
+      label {{data.username.label}}
+      input.form-control(type="text", [(ngModel)]="data.username.value", name="username", [placeholder]="data.username.placeholder")
+    .form-group
+      label {{data.password.label}}
+      input.form-control(type="password", [(ngModel)]="data.password.value", name="password", [placeholder]="data.password.placeholder")
+    .form-group
+      button.i-hideBtnSubmit 试试
+      app-button([data]="controlData.appBtn")

@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class NotFoundComponent {
   @Input() data = {
+    title: 'Sorry! Page Not Found!',
     details: ''
   };
 }

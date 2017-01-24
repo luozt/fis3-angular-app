@@ -1,0 +1,3 @@
+.i-container([ngSwitch]="data.type")
+  button.btn.btn-primary(*ngSwitchCase="'primary'", type="button", (click)="data.onClick()") {{data.text}}
+  button.btn.btn-default(*ngSwitchCase="'default'", type="button", (click)="data.onClick()") {{data.text}}

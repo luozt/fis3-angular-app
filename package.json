@@ -13,16 +13,23 @@
     "clean": "fis3 server stop && fis3 server clean && node npm_scripts/clean.js",
     "clean.npm": "node npm_scripts/clean_npm.js",
     "clean.all": "npm run clean && npm run clean.npm",
-    "start": "npm run server && npm run release",
+    "start": "npm run clean && npm run server",
     "dev": "npm run release",
     "build": "npm run build.lc",
     "build.lc": "npm run release.lc",
     "build.qa": "npm run release.qa",
     "build.pr": "npm run release.pr"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luozt/fis3-angular2-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/luozt/fis3-angular2-app/issues"
+  },
   "engines": {
-    "node": "6.x",
-    "npm": "3.x"
+    "node": ">= 4.2.1",
+    "npm": ">= 3"
   },
   "keywords": [
     "fis3",
