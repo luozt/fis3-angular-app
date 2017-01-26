@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'pg-login',
-  templateUrl: './pg-login.component.pug',
-  styleUrls: ['./pg-login.component.less']
+  selector: 'login',
+  templateUrl: './login.component.pug',
+  styleUrls: ['./login.component.less']
 })
-export class PgLoginComponent {
+export class LoginComponent {
   controlData = {
     auth: null,
   }

@@ -3,15 +3,15 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { routes } from './pg-detail-child.routes';
-import { PgDetailChildComponent } from './pg-detail-child.component';
+import { routes } from './detail-child.routes';
+import { DetailChildComponent } from './detail-child.component';
 
-console.log('`pg-detail-child` module loaded asynchronously');
+console.log('`detail-child` module loaded asynchronously');
 
 @NgModule({
   declarations: [
     // Components / Directives/ Pipes
-    PgDetailChildComponent,
+    DetailChildComponent,
   ],
   imports: [
     CommonModule,
@@ -19,6 +19,6 @@ console.log('`pg-detail-child` module loaded asynchronously');
     RouterModule.forChild(routes),
   ],
 })
-export class PgDetailChildModule {
+export class DetailChildModule {
   public static routes = routes;
 }

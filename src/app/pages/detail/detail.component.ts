@@ -6,17 +6,17 @@ import { Component, OnInit, } from '@angular/core';
  * see https://github.com/gdi2290/es6-promise-loader for more info
  */
 
-console.log('`pg-detail` component loaded asynchronously');
+console.log('`detail` component loaded asynchronously');
 
 @Component({
-  selector: 'pg-detail',
-  templateUrl: './pg-detail.component.pug',
-  styleUrls: ['./pg-detail.component.less'],
+  selector: 'detail',
+  templateUrl: './detail.component.pug',
+  styleUrls: ['./detail.component.less'],
 })
-export class PgDetailComponent implements OnInit {
+export class DetailComponent implements OnInit {
 
   public ngOnInit() {
-    console.log('`pg-detail` component ngOnInit');
+    console.log('`detail` component ngOnInit');
   }
 
 }

@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
 
 /**
- * ho-operate这个命名
+ * home-operate这个命名
  * 它实际上等于home-operate
  */
 @Component({
-  selector: 'ho-operate',
-  templateUrl: './ho-operate.component.pug',
-  styleUrls: ['./ho-operate.component.less']
+  selector: 'home-operate',
+  templateUrl: './home-operate.component.pug',
+  styleUrls: ['./home-operate.component.less']
 })
-export class HoOperateComponent {
+export class HomeOperateComponent {
   @Input() data = {
     btnText: '登录',
     onClickBtn: ()=>{}

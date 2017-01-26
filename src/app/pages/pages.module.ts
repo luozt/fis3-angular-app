@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ContentsModule } from '../contents';
 import { WidgetsModule } from '../widgets';
-import { PgHomeComponent } from './pg-home';
-import { PgLoginComponent } from './pg-login';
-import { Pg404Component } from './pg-404';
+import { HomeComponent } from './home';
+import { LoginComponent } from './login';
+import { NoContentComponent } from './no-content';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 const componentsList = [
-  PgHomeComponent,
-  PgLoginComponent,
-  Pg404Component
+  HomeComponent,
+  LoginComponent,
+  NoContentComponent,
 ];
 
 @NgModule({

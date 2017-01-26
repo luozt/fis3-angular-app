@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'pg-404',
-  templateUrl: './pg-404.component.pug',
-  styleUrls: ['./pg-404.component.less']
+  selector: 'no-content',
+  templateUrl: './no-content.component.pug',
+  styleUrls: ['./no-content.component.less']
 })
-export class Pg404Component {
+export class NoContentComponent {
   controlData = {
     notFound: null,
   };

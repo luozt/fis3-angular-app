@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { WidgetsModule } from '../widgets';
 import { AuthComponent } from './auth';
 import { FooterBarComponent } from './footer-bar';
-import { HoOperateComponent } from './ho-operate';
+import { HomeOperateComponent } from './home-operate';
 import { NotFoundComponent } from './not-found';
 import { NavigationComponent } from './navigation';
 import { WelcomeComponent } from './welcome';
@@ -16,7 +16,7 @@ import { WelcomeComponent } from './welcome';
 const componentsList = [
   AuthComponent,
   FooterBarComponent,
-  HoOperateComponent,
+  HomeOperateComponent,
   NotFoundComponent,
   NavigationComponent,
   WelcomeComponent,

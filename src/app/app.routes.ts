@@ -1,16 +1,16 @@
 import { Routes, RouterModule } from '@angular/router';
-import { PgHomeComponent } from './pages/pg-home';
-import { PgLoginComponent } from './pages/pg-login';
-import { Pg404Component } from './pages/pg-404';
+import { HomeComponent } from './pages/home';
+import { LoginComponent } from './pages/login';
+import { NoContentComponent } from './pages/no-content';
 
 export const ROUTES: Routes = [
-  { path: '',      component: PgHomeComponent },
-  { path: 'home',  component: PgHomeComponent },
-  { path: 'login',  component: PgLoginComponent },
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'detail', loadChildren: function(){
-    return require('./pages/pg-detail').PgDetailModule;
+    return require('./pages/detail').DetailModule;
   }},
-  { path: '**',    component: Pg404Component },
+  { path: '**', component: NoContentComponent },
 ];
 
 /**
