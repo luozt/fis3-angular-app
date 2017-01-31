@@ -9,6 +9,7 @@ export class WelcomeComponent {
   @Input() data = {
     title: '',
     greeting: '',
+    greetingColor: '#000'
   };
 
   currDateStr;

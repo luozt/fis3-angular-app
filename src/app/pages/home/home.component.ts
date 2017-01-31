@@ -24,6 +24,7 @@ export class HomeComponent {
     this.controlData.welcome = {
       title: '欢迎来到fis3 angular2 app!',
       greeting: '这是一个基于fis3开发的Angular2框架。',
+      greetingColor: 'blue'
     };
     this.controlData.homeOperate = {
       btnText: '去登录',

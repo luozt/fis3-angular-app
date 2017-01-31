@@ -12,6 +12,7 @@ import { NavigationComponent } from './navigation';
 import { WelcomeComponent } from './welcome';
 
 import { PipesModule } from '../pipes';
+import { DirectivesModule } from '../directives';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -27,6 +28,7 @@ const componentsList = [
 
 const moduleList = [
   PipesModule,
+  DirectivesModule,
 ];
 
 @NgModule({
