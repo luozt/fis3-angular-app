@@ -27,17 +27,13 @@ export class AppComponent implements OnInit {
       type: 'router', // unset | router
       items: [
         {
-          routerLink: ['./home'],
+          routerLink: ['home'],
           routerLinkActive: 'active',
           text: '首页'
         }, {
-          routerLink: ['./login'],
+          routerLink: ['login'],
           routerLinkActive: 'active',
           text: '登录'
-        }, {
-          routerLink: ['./detail'],
-          routerLinkActive: 'active',
-          text: '详情页'
         }
       ]
     };

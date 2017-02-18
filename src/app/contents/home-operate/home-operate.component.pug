@@ -1,3 +1,8 @@
 .alert.alert-info
-  a.btn.btn-link 现在开始
-  app-button([data]="controlData.btnStart")
+  .form-inline
+    .form-group
+      a.btn.btn-link 现在开始
+    .form-group
+      app-button([data]="controlData.btnStart")
+    .form-group
+      app-button([data]="controlData.btnOpen")

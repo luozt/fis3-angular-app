@@ -3,27 +3,26 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { DetailComponent } from './detail';
+import { DetailChildComponent } from './detail-child';
+
 import { ContentsModule } from '../contents';
 import { WidgetsModule } from '../widgets';
-import { routes } from './pages.routes';
+import { routes } from './pages-detail.routes';
 
-import { HomeComponent } from './home';
-import { LoginComponent } from './login';
-import { NocontentComponent } from './nocontent';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 const componentsList = [
-  HomeComponent,
-  LoginComponent,
-  NocontentComponent,
+  DetailComponent,
+  DetailChildComponent,
 ];
 
 const moduleList = [
   ContentsModule,
   WidgetsModule,
-  RouterModule.forChild(routes)
+  RouterModule.forChild(routes),
 ];
 
 @NgModule({
@@ -35,5 +34,5 @@ const moduleList = [
      ...componentsList
   ],
 })
-export class PagesModule {
+export class PagesDetailModule {
 }

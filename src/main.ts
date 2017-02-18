@@ -1,7 +1,7 @@
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { bootloader } from '@angularclass/hmr';
-import { AppModule } from './app';
+import { AppModule } from './app/app.module';
 
 /** 启动APP */
 export function main(): Promise<any> {

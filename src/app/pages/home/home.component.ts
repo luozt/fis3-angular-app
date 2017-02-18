@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'home',
@@ -13,7 +13,8 @@ export class HomeComponent {
   }
 
   constructor(
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     ){}
 
   ngOnInit(){
@@ -28,8 +29,11 @@ export class HomeComponent {
     };
     this.controlData.homeOperate = {
       btnText: '去登录',
-      onClickBtn: ()=>{
+      onClickStart: ()=>{
         this.router.navigate(['login']);
+      },
+      onClickOpen: ()=>{
+        this.router.navigate(['detail'], { relativeTo: this.activatedRoute });
       }
     };
   }

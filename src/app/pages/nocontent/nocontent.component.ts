@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'no-content',
-  templateUrl: './no-content.component.pug',
-  styleUrls: ['./no-content.component.less']
+  selector: 'nocontent',
+  templateUrl: './nocontent.component.pug',
+  styleUrls: ['./nocontent.component.less']
 })
-export class NoContentComponent {
+export class NocontentComponent {
   controlData = {
     notFound: null,
   };

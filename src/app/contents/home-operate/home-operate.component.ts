@@ -12,7 +12,8 @@ import { Component, Input } from '@angular/core';
 export class HomeOperateComponent {
   @Input() data = {
     btnText: '登录',
-    onClickBtn: ()=>{}
+    onClickStart: ()=>{},
+    onClickOpen: ()=>{},
   };
 
   controlData = {
@@ -27,7 +28,12 @@ export class HomeOperateComponent {
     this.controlData.btnStart = {
       type: 'primary',
       text: '去登录',
-      onClick: this.data.onClickBtn
+      onClick: this.data.onClickStart
+    };
+    this.controlData.btnOpen = {
+      type: 'default',
+      text: '打开详情',
+      onClick: this.data.onClickOpen
     };
   }
 }
