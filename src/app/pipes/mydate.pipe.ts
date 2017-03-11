@@ -43,13 +43,14 @@ export class MyDatePipe implements PipeTransform{
           let year = strValue.slice(0,4);
           let month = strValue.slice(4,6);
           let date = strValue.slice(6,8);
+          let hour, minute;
 
           if(14 === strValue.length){
-            let hour = strValue.slice(8,10);
-            let minute = strValue.slice(10,12);
+            hour = strValue.slice(8,10);
+            minute = strValue.slice(10,12);
           }else{
-            let hour = strValue.slice(8,9);
-            let minute = strValue.slice(9,11);
+            hour = strValue.slice(8,9);
+            minute = strValue.slice(9,11);
           }
 
           result = year+'/'+month+'/'+date+' ' + hour + ':' + minute;
@@ -62,15 +63,16 @@ export class MyDatePipe implements PipeTransform{
           let year = strValue.slice(0,4);
           let month = strValue.slice(4,6);
           let date = strValue.slice(6,8);
+          let hour, minute, second;
 
           if(14 === strValue.length){
-            let hour = strValue.slice(8,10);
-            let minute = strValue.slice(10,12);
-            let second = strValue.slice(12,14);
+            hour = strValue.slice(8,10);
+            minute = strValue.slice(10,12);
+            second = strValue.slice(12,14);
           }else{
-            let hour = strValue.slice(8,9);
-            let minute = strValue.slice(9,11);
-            let second = strValue.slice(11,13);
+            hour = strValue.slice(8,9);
+            minute = strValue.slice(9,11);
+            second = strValue.slice(11,13);
           }
 
           result = year+'-'+month+'-'+date+' ' + hour + ':' + minute + ':' + second;
